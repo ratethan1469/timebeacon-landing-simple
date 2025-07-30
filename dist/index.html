@@ -7,7 +7,7 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.airtable.com;">
     <title>Timebeacon - Automatic Time Tracking for Customer Teams</title>
     
     <!-- Google Fonts -->
@@ -500,15 +500,32 @@
                 form.style.display = 'none';
                 successMessage.classList.add('show');
                 
-                // Send to backend without logging sensitive data
-                // Note: Email data is not logged to console for security
-                
-                // Optional: Send to your actual backend
-                // fetch('/api/waitlist', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ email: email })
-                // });
+                // Send to secure backend
+                try {
+                    const response = await fetch('/api/waitlist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: sanitizedEmail })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Failed to submit email');
+                    }
+                    
+                    // Success - email saved to Airtable
+                    console.log('Email submitted successfully');
+                    
+                } catch (error) {
+                    // Show error to user but still hide form
+                    console.error('Submission error:', error.message);
+                    alert('Something went wrong. Please try again.');
+                    // Reset form display
+                    form.style.display = 'flex';
+                    successMessage.classList.remove('show');
+                    return;
+                }
             });
         }
         

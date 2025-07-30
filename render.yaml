@@ -10,5 +10,15 @@ services:
         value: production
       - key: NODE_VERSION  
         value: "20"
+      - key: AIRTABLE_BASE_ID
+        value: appUakQF6GFNQPau0
+      - key: AIRTABLE_API_TOKEN
+        value: pat69iOlPqbmwbDDU.4ad48f9fed73c771c0f93a9c063efc0d4dfe3267c4ae226e382cf9c8f320c866
+      - key: AIRTABLE_TABLE_NAME
+        value: Timebeacon Waitlist
+      - key: RESEND_API_KEY
+        value: re_CuynedSH_HhLSCj7NdoCMnMXaSVxGPzaw
+      - key: FROM_EMAIL
+        value: noreply@timebeacon.io
     domains:
       - timebeacon.io
