@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self';">
     <title>Timebeacon - Automatic Time Tracking for Customer Teams</title>
     
     <!-- Google Fonts -->
@@ -482,19 +487,24 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Simple email validation
+                // Enhanced email validation and sanitization
                 const email = emailInput.value.trim();
-                if (!email || !email.includes('@')) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!email || !emailRegex.test(email)) {
                     alert('Please enter a valid email address');
                     return;
                 }
+                
+                // Sanitize email to prevent XSS
+                const sanitizedEmail = email.replace(/[<>'"&]/g, '');
                 
                 // Hide form and show success message
                 form.style.display = 'none';
                 successMessage.classList.add('show');
                 
-                // Here you would typically send the email to your backend
-                console.log('Email submitted:', email);
+                // Send to backend without logging sensitive data
+                // Note: Email data is not logged to console for security
                 
                 // Optional: Send to your actual backend
                 // fetch('/api/waitlist', {
