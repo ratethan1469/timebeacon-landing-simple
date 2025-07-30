@@ -4,6 +4,7 @@
   "description": "Simple landing page for Timebeacon - automatic time tracking",
   "main": "server.js",
   "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/",
     "start": "node server.js",
     "dev": "node server.js"
   },

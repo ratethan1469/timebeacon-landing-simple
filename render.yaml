@@ -3,9 +3,8 @@ services:
     name: timebeacon-landing
     env: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: npm start
-    publishDirectory: .
     envVars:
       - key: NODE_ENV
         value: production

@@ -9,9 +9,12 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
-// Serve the simple HTML landing page
+// Serve static files from dist directory
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Serve the landing page for all routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
