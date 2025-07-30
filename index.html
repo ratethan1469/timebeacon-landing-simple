@@ -342,6 +342,89 @@
         .success-message.show {
             display: block;
         }
+        
+        /* Confirmation Popup */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-overlay.show {
+            display: flex;
+        }
+        
+        .popup-content {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            animation: popupSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes popupSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+        }
+        
+        .popup-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+        
+        .popup-message {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        
+        .popup-close {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .popup-close:hover {
+            background: #374151;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -474,6 +557,19 @@
         </div>
     </footer>
 
+    <!-- Confirmation Popup -->
+    <div class="popup-overlay" id="confirmationPopup">
+        <div class="popup-content">
+            <div class="popup-icon">🎉</div>
+            <h2 class="popup-title">You're in!</h2>
+            <p class="popup-message">
+                Welcome to TimeBeacon early access! We've sent a confirmation email with next steps. 
+                We'll reach out soon with early access details for you and your team.
+            </p>
+            <button class="popup-close" onclick="closeConfirmationPopup()">Got it!</button>
+        </div>
+    </div>
+
     <script>
         // Handle form submissions
         function handleFormSubmit(formId, successId, emailId) {
@@ -481,7 +577,7 @@
             const successMessage = document.getElementById(successId);
             const emailInput = document.getElementById(emailId);
             
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 // Enhanced email validation and sanitization
@@ -496,11 +592,7 @@
                 // Sanitize email to prevent XSS
                 const sanitizedEmail = email.replace(/[<>'"&]/g, '');
                 
-                // Hide form and show success message
-                form.style.display = 'none';
-                successMessage.classList.add('show');
-                
-                // Send to secure backend
+                // Send to secure backend first
                 try {
                     const response = await fetch('/api/waitlist', {
                         method: 'POST',
@@ -514,20 +606,42 @@
                         throw new Error(result.error || 'Failed to submit email');
                     }
                     
-                    // Success - email saved to Airtable
-                    console.log('Email submitted successfully');
+                    // Success - hide form and show popup
+                    form.style.display = 'none';
+                    successMessage.classList.add('show');
+                    showConfirmationPopup();
                     
                 } catch (error) {
-                    // Show error to user but still hide form
+                    // Show error to user
                     console.error('Submission error:', error.message);
                     alert('Something went wrong. Please try again.');
-                    // Reset form display
-                    form.style.display = 'flex';
-                    successMessage.classList.remove('show');
                     return;
                 }
             });
         }
+        
+        // Popup functions
+        function showConfirmationPopup() {
+            document.getElementById('confirmationPopup').classList.add('show');
+        }
+        
+        function closeConfirmationPopup() {
+            document.getElementById('confirmationPopup').classList.remove('show');
+        }
+        
+        // Close popup when clicking outside
+        document.getElementById('confirmationPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConfirmationPopup();
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeConfirmationPopup();
+            }
+        });
         
         // Initialize both forms
         handleFormSubmit('waitlistForm', 'successMessage', 'emailInput');
