@@ -33,25 +33,66 @@
         
         /* Header */
         .header {
-            padding: 20px 0;
-            text-align: center;
+            padding: 16px 0;
             background: #ffffff;
             border-bottom: 1px solid #f3f4f6;
         }
         
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+        
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             color: #000000;
         }
         
+        .header-cta {
+            display: inline-block;
+            background: #000000;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .header-cta:hover {
+            background: #374151;
+        }
+        
         /* Hero Section */
         .hero {
-            padding: 80px 0 100px;
+            padding: 40px 0 80px;
             text-align: center;
             background: #ffffff;
-            margin: 40px 20px;
-            border-radius: 24px;
         }
         
         .hero-badge {
@@ -77,10 +118,6 @@
         @media (min-width: 768px) {
             .hero-title {
                 font-size: 56px;
-            }
-            .hero {
-                margin: 60px 40px;
-                padding: 100px 60px 120px;
             }
         }
         
@@ -128,8 +165,6 @@
         .problem {
             background: #ffffff;
             padding: 80px 0;
-            margin: 40px 20px;
-            border-radius: 24px;
         }
         
         .section-title {
@@ -179,8 +214,6 @@
         .solution {
             background: #ffffff;
             padding: 80px 0;
-            margin: 40px 20px;
-            border-radius: 24px;
         }
         
         .solution-intro {
@@ -226,8 +259,6 @@
         .final-cta {
             background: #ffffff;
             padding: 80px 0;
-            margin: 40px 20px;
-            border-radius: 24px;
             text-align: center;
         }
         
@@ -284,8 +315,6 @@
             padding: 60px 0 40px;
             text-align: center;
             background: #ffffff;
-            margin: 40px 20px 20px;
-            border-radius: 24px;
         }
         
         .footer p {
@@ -313,8 +342,12 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="logo">Timebeacon</div>
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">T</div>
+                <div class="logo">Timebeacon</div>
+            </div>
+            <a href="#waitlist" class="header-cta">Get Early Access</a>
         </div>
     </header>
 
@@ -322,7 +355,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-badge">🚀 Early Access - Limited Spots</div>
-            <h1 class="hero-title">Get 2.5 hours back every week. Your <span style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">personal time tracking assistant.</span></h1>
+            <h1 class="hero-title">Get 2.5 hours back every week.<br>Your <span style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">personal time tracking assistant.</span></h1>
             <p class="hero-subtitle">
                 TimeBeacon automatically generates rich, contextual time entries from your calendar, email, and Slack activity. 
                 No more daily timesheet torture. No more "meeting" descriptions. Just accurate, detailed entries ready for approval.
