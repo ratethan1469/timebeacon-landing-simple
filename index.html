@@ -21,7 +21,8 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #1a1a1a;
-            background: #ffffff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
         
         .container {
@@ -34,43 +35,61 @@
         .header {
             padding: 20px 0;
             text-align: center;
-            border-bottom: 1px solid #f0f0f0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #6366f1;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         /* Hero Section */
         .hero {
-            padding: 60px 0 80px;
+            padding: 80px 0 100px;
             text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px 20px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .hero-badge {
             display: inline-block;
-            background: #f3f4f6;
-            color: #6b7280;
-            padding: 8px 16px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 24px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 16px rgba(240, 147, 251, 0.3);
         }
         
         .hero-title {
-            font-size: 36px;
-            font-weight: 700;
+            font-size: 42px;
+            font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 20px;
-            color: #111827;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #1a1a1a, #4a5568);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         @media (min-width: 768px) {
             .hero-title {
-                font-size: 48px;
+                font-size: 56px;
+            }
+            .hero {
+                margin: 60px 40px;
+                padding: 100px 60px 120px;
             }
         }
         
@@ -85,21 +104,25 @@
         
         .cta-button {
             display: inline-block;
-            background: #6366f1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
+            padding: 18px 36px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 16px;
-            transition: all 0.2s;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .cta-button:hover {
-            background: #5856eb;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
         
         .social-proof {
@@ -114,8 +137,12 @@
         
         /* Problem Section */
         .problem {
-            background: #f9fafb;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 80px 0;
+            margin: 40px 20px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .section-title {
@@ -163,7 +190,12 @@
         
         /* Solution Section */
         .solution {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 80px 0;
+            margin: 40px 20px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .solution-intro {
@@ -181,15 +213,16 @@
         }
         
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: #ede9fe;
-            border-radius: 12px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 24px;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            box-shadow: 0 10px 25px rgba(252, 182, 159, 0.3);
         }
         
         .feature h3 {
@@ -206,8 +239,12 @@
         
         /* CTA Section */
         .final-cta {
-            background: #f9fafb;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 80px 0;
+            margin: 40px 20px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         
@@ -259,14 +296,18 @@
         
         /* Footer */
         .footer {
-            padding: 40px 0;
+            padding: 60px 0 40px;
             text-align: center;
-            border-top: 1px solid #f0f0f0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            margin: 40px 20px 20px;
+            border-radius: 24px;
         }
         
         .footer p {
-            color: #9ca3af;
+            color: #6b7280;
             font-size: 14px;
+            font-weight: 500;
         }
         
         /* Success Message */
