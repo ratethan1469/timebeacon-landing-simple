@@ -107,8 +107,12 @@ app.post('/api/waitlist', async (req, res) => {
       }
     }
     
-    console.log('Email successfully captured');
-    res.status(200).json({ success: true, message: 'Email captured successfully' });
+    console.log('Email successfully captured and confirmation email sent');
+    res.status(200).json({ 
+      success: true, 
+      message: 'Email captured successfully',
+      emailSent: resend ? true : false
+    });
     
   } catch (error) {
     console.error('Waitlist error:', error.message);

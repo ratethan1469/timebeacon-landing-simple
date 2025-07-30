@@ -19,6 +19,6 @@ services:
       - key: RESEND_API_KEY
         value: re_CuynedSH_HhLSCj7NdoCMnMXaSVxGPzaw
       - key: FROM_EMAIL
-        value: noreply@timebeacon.io
+        value: onboarding@resend.dev
     domains:
       - timebeacon.io
