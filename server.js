@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,17 @@ app.use(helmet({
     preload: true
   }
 }));
+
+// Disable x-powered-by header
+app.disable('x-powered-by');
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.'
+});
+app.use(limiter);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
